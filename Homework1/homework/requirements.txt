@@ -1,0 +1,40 @@
+# Document parsing (replaces PyPDF2, python-docx, beautifulsoup4, pytesseract)
+# Use Python 3.11 or 3.12 if install fails: 3.14 often lacks wheels (numpy/numba) and pip builds from source.
+# Install the package "unstructured", then: from unstructured.partition.auto import partition
+# unstructured[pdf,docx,xlsx]>=0.16.0
+unstructured
+
+# Chunking (replaces hand-rolled chunker)
+langchain-text-splitters>=0.3.0
+
+# Encoding detection (replaces hand-rolled EncodingNormalizer)
+charset-normalizer>=3.0.0
+
+# File type detection via magic bytes (replaces hand-rolled MAGIC_SIGNATURES)
+filetype>=1.2.0
+
+# PDF table extraction
+pdfplumber>=0.10.0
+
+# Retry with backoff (replaces hand-rolled retry_with_backoff)
+tenacity>=9.0.0
+
+# Streaming / watching
+watchdog>=4.0.0
+
+# Config
+PyYAML>=6.0.0
+
+# Sample generation (still needed for generate_samples.py)
+openpyxl>=3.1.0
+python-docx>=1.1.0
+
+# Testing
+pytest>=8.0.0
+
+# Evaluator
+nbformat>=5.0.0
+
+# Jupyter / Cursor notebook kernel (fixes "missing module packaging")
+packaging>=23.0
+ipykernel>=6.0.0

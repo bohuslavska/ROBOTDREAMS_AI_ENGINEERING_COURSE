@@ -1,0 +1,39 @@
+{
+  "dataset": "simple",
+  "provider": "ollama",
+  "json_valid": true,
+  "result": {
+    "summary": "Обговорення планів розробки нового дашборду аналітики для клієнтів.",
+    "tasks": [
+      {
+        "owner": "Анна",
+        "task": "Виконання прототипу UI-дашборду",
+        "deadline": "2026-05-10"
+      },
+      {
+        "owner": "Іван",
+        "task": "Підготовка API для отримання даних користувачів",
+        "deadline": "2026-05-15"
+      }
+    ],
+    "decisions": [
+      {
+        "owner": "Анна",
+        "decision": "Употребувати React для фронтенду",
+        "deadline": "2026-05-20"
+      },
+      {
+        "owner": "Мартин",
+        "decision": "Потрібно реалізувати API для отримання даних користувачів",
+        "deadline": "2026-05-15"
+      }
+    ]
+  },
+  "latency": 254.54,
+  "tokens_in": 243,
+  "tokens_out": 84,
+  "tokens_total": 327,
+  "cost_usd": 0.0,
+  "error": null,
+  "notes": "Owners swapped: Анна got Іван's UI task, Іван got Мартин's API task. Decisions returned as objects with extra invented deadlines."
+}

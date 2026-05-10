@@ -1,0 +1,31 @@
+{
+  "dataset": "chaotic",
+  "provider": "openai",
+  "json_valid": true,
+  "result": {
+    "summary": "На зустрічі обговорили завдання з міграції бази даних та документації API, а також прийняли рішення щодо деплою та нового сервера.",
+    "tasks": [
+      {
+        "owner": "Дмитро",
+        "task": "Написати тести до бази даних",
+        "deadline": "2023-05-14"
+      },
+      {
+        "owner": "Катя",
+        "task": "Завершити API документацію",
+        "deadline": "2023-05-13"
+      }
+    ],
+    "decisions": [
+      "Деплой тільки через CI/CD, без руками в прод.",
+      "Замовити новий сервер з 32 гб рам."
+    ]
+  },
+  "latency": 4.12,
+  "tokens_in": 688,
+  "tokens_out": 156,
+  "tokens_total": 844,
+  "cost_usd": 0.000253,
+  "error": null,
+  "notes": "Year in deadlines is 2023 — text did not specify the year explicitly."
+}

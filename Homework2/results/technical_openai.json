@@ -1,0 +1,55 @@
+{
+  "dataset": "technical",
+  "provider": "openai",
+  "json_valid": true,
+  "result": {
+    "summary": "Обговорено перехід на нову архітектуру мікросервісів з виокремленням auth-сервісу та іншими технічними аспектами.",
+    "tasks": [
+      {
+        "owner": "Роман",
+        "task": "auth-мікросервіс на FastAPI з JWT",
+        "deadline": "2023-05-22"
+      },
+      {
+        "owner": "Соломія",
+        "task": "Helm-чарти для нових сервісів",
+        "deadline": "2023-05-19"
+      },
+      {
+        "owner": "Соломія",
+        "task": "Istio конфігурація",
+        "deadline": "2023-05-25"
+      },
+      {
+        "owner": "Наталя",
+        "task": "threat model для нової архітектури",
+        "deadline": "2023-05-18"
+      },
+      {
+        "owner": "Наталя",
+        "task": "mTLS налаштування",
+        "deadline": "2023-05-25"
+      },
+      {
+        "owner": "Соломія",
+        "task": "моніторинг стек",
+        "deadline": "2023-05-28"
+      }
+    ],
+    "decisions": [
+      "переходимо на event-driven через Kafka для асинхронної комунікації між сервісами",
+      "PostgreSQL залишається основною БД, але кожен сервіс матиме свою схему",
+      "Redis для кешування і сесій",
+      "API Gateway — Kong",
+      "всі зовнішні API через HTTPS, внутрішні — через mTLS",
+      "Prometheus + Grafana для моніторингу"
+    ]
+  },
+  "latency": 4.8,
+  "tokens_in": 829,
+  "tokens_out": 364,
+  "tokens_total": 1193,
+  "cost_usd": 0.000358,
+  "error": null,
+  "notes": "Perfect extraction: all 6 tasks (Роман, Соломія x3, Наталя x2) and all 6 architectural decisions. Year defaults to 2023 due to missing explicit year in source text."
+}

@@ -1,0 +1,7 @@
+Dataset,Provider,JSON Valid,Tasks Found,Tasks Total,Tasks Accuracy,Hallucinations,Tokens In,Tokens Out,Tokens Total,Cost (USD),Latency (s),Notes
+simple,ollama,TRUE,2,2,100%,2,243,84,327,0.000000,254.54,"Owners swapped (Анна замість Іван, Іван замість Мартин); decisions returned as dict objects with extra invented deadlines"
+simple,openai,TRUE,2,2,100%,0,568,166,734,0.000220,3.19,"Perfect: правильні власники, ISO дати, decisions як рядки"
+chaotic,ollama,TRUE,2,2,100%,1,339,93,432,0.000000,235.85,"Wrong owner: задача міграції/тестів призначена Олі (фасилітатор) замість Дмитра; decisions як обʼєкти"
+chaotic,openai,TRUE,2,2,100%,0,688,156,844,0.000253,4.12,"Правильні власники (Дмитро, Катя); рік у деталях 2023 (текст не задавав явно)"
+technical,ollama,TRUE,4,6,67%,1,405,200,605,0.000000,343.10,"ENGLISH instead of Ukrainian (порушив інструкцію); вигадав Bogdan як виконавця; пропустив monitoring task для Соломії; decisions як обʼєкти"
+technical,openai,TRUE,6,6,100%,0,829,364,1193,0.000358,4.80,"Всі 6 задач + 6 рішень витягнуті ідеально українською"

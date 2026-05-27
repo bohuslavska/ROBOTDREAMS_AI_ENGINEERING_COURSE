@@ -1,22 +1,22 @@
 # ДЗ Lesson 9 — Find the Breaking Point
 
-Оцінила dense retrieval pipeline на MS MARCO з embedding-моделлю BAAI/bge-small-en-v1.5 на корпусах розміром 1K, 10K, 100K і 300K passages. 
-**Baseline**: numpy brute-force search, тобто кожен query vector порівнювався з усіма document vectors. 
+Оцінила dense retrieval pipeline на MS MARCO з embedding-моделлю BAAI/bge-small-en-v1.5 на корпусах розміром 1K, 10K, 100K і 300K passages.
+**Baseline**: numpy brute-force search, тобто кожен query vector порівнювався з усіма document vectors.
+
 **Fix**: HNSW approximate nearest-neighbor index, щоб замінити повний перебір векторів.
 
-##Latency
+## Latency
 
 Основним bottleneck у baseline стала latency. На великих корпусах latency помітно зростала: p95 latency дійшла приблизно до 8 ms на 300K passages, а p99 — приблизно до 13 ms. 
 
 Після застосування HNSW latency залишалася майже стабільною: p95 була нижче 1 ms навіть на 300K passages. Це показує, що HNSW значно краще масштабується для великих корпусів, ніж brute-force search.
 
-##Якість
+## Якість
 
 Якість retrieval поступово знижувалася зі збільшенням корпусу. Recall@1 впав приблизно з 0.98 на 1K до 0.78 у baseline на 300K, тобто приблизно на 20%, тобто це quality breakpoint. 
 Recall@10 деградував повільніше: з 1.0 до приблизно 0.94 у baseline. Тобто релевантний документ часто не зникає з top-10, а просто сповзає з першої позиції нижче.
 
 HNSW fix трохи знизив Recall@1, Recall@10 і MRR@10 порівняно з brute-force baseline, адже HNSW - це approximate search. Але виграш у latency був значно більшим, ніж втрата якості. Для production на корпусі 1M+ passages я б рекомендувала використовувати ANN index на кшталт HNSW.
-
 
 
 R&D-завдання: побудувати RAG-систему і **навмисно її зламати** через scaling, щоб знайти, де саме і чому вона починає деградувати.

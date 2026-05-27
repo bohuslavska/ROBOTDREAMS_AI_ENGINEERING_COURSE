@@ -1,0 +1,20 @@
+# Core
+numpy>=1.26,<2.0
+pandas>=2.2
+psutil>=5.9
+tqdm>=4.66
+
+# Datasets
+datasets>=2.18
+
+# Embeddings / models
+torch>=2.3
+transformers>=4.41,<5.0
+sentence-transformers>=3.0,<4.0
+
+# Vector search / retrieval
+hnswlib>=0.8.0
+rank-bm25>=0.2.2
+
+# Plotting / report
+matplotlib>=3.8

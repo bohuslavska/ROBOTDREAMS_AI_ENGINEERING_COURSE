@@ -1,6 +1,7 @@
 # ДЗ Lesson 9 — Find the Breaking Point
 
 Оцінила dense retrieval pipeline на MS MARCO з embedding-моделлю BAAI/bge-small-en-v1.5 на корпусах розміром 1K, 10K, 100K і 300K passages.
+
 **Baseline**: numpy brute-force search, тобто кожен query vector порівнювався з усіма document vectors.
 
 **Fix**: HNSW approximate nearest-neighbor index, щоб замінити повний перебір векторів.

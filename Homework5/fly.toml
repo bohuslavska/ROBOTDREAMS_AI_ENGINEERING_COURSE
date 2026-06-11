@@ -1,42 +1,45 @@
-app = "robot_dreams_hw"
-primary_region = "fra"
+# fly.toml app configuration file generated for robot-dreams-hw on 2026-06-11T21:50:02Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'robot-dreams-hw'
+primary_region = 'fra'
 
 [build]
 
 [env]
-  QDRANT_COLLECTION = "document_chunks"
-  QDRANT_CACHE_COLLECTION = "semantic_cache"
-  SEMANTIC_CACHE_THRESHOLD = "0.92"
-  SEMANTIC_CACHE_TTL_SECONDS = "3600"
+  CHUNK_OVERLAP_TOKENS = '50'
+  CHUNK_SIZE_TOKENS = '500'
+  EMBEDDING_DIM = '384'
+  EMBEDDING_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
+  LANGFUSE_ENABLED = 'true'
+  QDRANT_CACHE_COLLECTION = 'semantic_cache'
+  QDRANT_COLLECTION = 'document_chunks'
+  SEMANTIC_CACHE_THRESHOLD = '0.92'
+  SEMANTIC_CACHE_TTL_SECONDS = '3600'
+  USAGE_DB_PATH = '/app/data/usage.sqlite3'
 
-  EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-  EMBEDDING_DIM = "384"
-
-  CHUNK_SIZE_TOKENS = "500"
-  CHUNK_OVERLAP_TOKENS = "50"
-
-  USAGE_DB_PATH = "/app/data/usage.sqlite3"
-  LANGFUSE_ENABLED = "true"
-
-[vm]
-  memory = "1gb"
-  cpu_kind = "shared"
-  cpus = 1
+[[mounts]]
+  source = 'rag_data'
+  destination = '/app/data'
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = 'off'
   auto_start_machines = true
   min_machines_running = 1
 
   [[http_service.checks]]
-    grace_period = "60s"
-    interval = "15s"
-    method = "GET"
-    path = "/health"
-    timeout = "5s"
+    interval = '15s'
+    timeout = '5s'
+    grace_period = '1m0s'
+    method = 'GET'
+    path = '/health'
 
-[[mounts]]
-  source = "rag_data"
-  destination = "/app/data"
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256

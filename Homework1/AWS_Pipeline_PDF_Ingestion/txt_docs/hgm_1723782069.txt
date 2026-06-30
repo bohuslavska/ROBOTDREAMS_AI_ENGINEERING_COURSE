@@ -1,0 +1,761 @@
+huggingfacemodels
+August 15, 2024
+1 Getting Started with Hugging Face
+#What is Hugging Face￿ Ecosystem ?
+The Hugging Face ecosystem is a comprehensive and popular platform for natural language pro-
+cessing (NLP) and machine learning (ML). It provides a wide range of tools, libraries, and services
+designed to facilitate the development, deployment, and sharing of ML models.
+1.0.1 Hugging F ace Ecosystem
+• T ransformers Library:
+– T ransformers: Provides thousands of pre-trained models for tasks like text classifica-
+tion, translation, question answering, and text generation.
+– T okenizers: Specialized for tokenizing text, essential for NLP model preparation.
+• Datasets:
+– Access to various datasets for NLP and ML, simplifying loading, processing, and man-
+agement.
+• Hugging F ace Hub:
+– Platform for sharing and discovering pre-trained models and datasets.
+• Inference API :
+– Cloud service for deploying models and obtaining predictions via API calls.
+• Spaces:
+– Create and share interactive ML applications using Gradio or Streamlit.
+• T raining and Deployment:
+– Tools for training models on custom datasets and deploying them using PyTorch, Ten-
+sorFlow, and cloud services.
+• Model Evaluation :
+– Tools for evaluating and improving ML model performance on various tasks.
+• Community and Collaboration :
+– Active community sharing models, datasets, and knowledge, with forums and learning
+resources.
+2 Pipeline
+The pipeline in Hugging Face’s Transformers library is a high-level abstraction that simplifies the
+use of pre-trained models for various natural language processing (NLP) tasks. It allows users to
+perform complex tasks with minimal code
+1
+
+[1]: from transformers import pipeline
+[2]: # Sentiment Analysis
+classifier = pipeline('sentiment-analysis')
+result = classifier("I hate Coding! ")
+print(result)
+No model was supplied, defaulted to distilbert/distilbert-base-uncased-
+finetuned-sst-2-english and revision af0f99b
+(https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-
+sst-2-english).
+Using a pipeline without specifying a model name and revision in production is
+not recommended.
+/usr/local/lib/python3.10/dist-packages/huggingface_hub/utils/_token.py:89:
+UserWarning:
+The secret `HF_TOKEN` does not exist in your Colab secrets.
+To authenticate with the Hugging Face Hub, create a token in your settings tab
+(https://huggingface.co/settings/tokens), set it as secret in your Google Colab
+and restart your session.
+You will be able to reuse this secret in all of your notebooks.
+Please note that authentication is recommended but still optional to access
+public models or datasets.
+warnings.warn(
+config.json: 0%| | 0.00/629 [00:00<?, ?B/s]
+model.safetensors: 0%| | 0.00/268M [00:00<?, ?B/s]
+tokenizer_config.json: 0%| | 0.00/48.0 [00:00<?, ?B/s]
+vocab.txt: 0%| | 0.00/232k [00:00<?, ?B/s]
+[{'label': 'NEGATIVE', 'score': 0.9987181425094604}]
+[5]: # Named Entity Recognition (NER)
+ner = pipeline('ner')
+result = ner("Hi my name is Muhammad Mursaleen and I 'm a Software Engineering ␣
+↪graduate living in Pakistan. ")
+print(result)
+No model was supplied, defaulted to dbmdz/bert-large-cased-finetuned-
+conll03-english and revision f2482bf (https://huggingface.co/dbmdz/bert-large-
+cased-finetuned-conll03-english).
+Using a pipeline without specifying a model name and revision in production is
+not recommended.
+Some weights of the model checkpoint at dbmdz/bert-large-cased-finetuned-
+conll03-english were not used when initializing BertForTokenClassification:
+['bert.pooler.dense.bias', 'bert.pooler.dense.weight']
+- This IS expected if you are initializing BertForTokenClassification from the
+checkpoint of a model trained on another task or with another architecture (e.g.
+2
+
+initializing a BertForSequenceClassification model from a BertForPreTraining
+model).
+- This IS NOT expected if you are initializing BertForTokenClassification from
+the checkpoint of a model that you expect to be exactly identical (initializing
+a BertForSequenceClassification model from a BertForSequenceClassification
+model).
+[{'entity': 'I-PER', 'score': 0.99898595, 'index': 5, 'word': 'Muhammad',
+'start': 15, 'end': 23}, {'entity': 'I-PER', 'score': 0.99958473, 'index': 6,
+'word': 'Mu', 'start': 24, 'end': 26}, {'entity': 'I-PER', 'score': 0.9988122,
+'index': 7, 'word': '##rsa', 'start': 26, 'end': 29}, {'entity': 'I-PER',
+'score': 0.99832577, 'index': 8, 'word': '##leen', 'start': 29, 'end': 33},
+{'entity': 'I-ORG', 'score': 0.6245313, 'index': 14, 'word': 'Software',
+'start': 44, 'end': 52}, {'entity': 'I-ORG', 'score': 0.60825276, 'index': 15,
+'word': 'Engineering', 'start': 53, 'end': 64}, {'entity': 'I-LOC', 'score':
+0.99983656, 'index': 19, 'word': 'Pakistan', 'start': 84, 'end': 92}]
+[6]: # Question Answering
+question_answerer = pipeline('question-answering')
+result = question_answerer(question="What is Hugging Face? ", context ="Hugging␣
+↪Face is a company that provides open-source NLP technologies. ")
+print(result)
+No model was supplied, defaulted to distilbert/distilbert-base-cased-distilled-
+squad and revision 626af31 (https://huggingface.co/distilbert/distilbert-base-
+cased-distilled-squad).
+Using a pipeline without specifying a model name and revision in production is
+not recommended.
+config.json: 0%| | 0.00/473 [00:00<?, ?B/s]
+model.safetensors: 0%| | 0.00/261M [00:00<?, ?B/s]
+tokenizer_config.json: 0%| | 0.00/49.0 [00:00<?, ?B/s]
+vocab.txt: 0%| | 0.00/213k [00:00<?, ?B/s]
+tokenizer.json: 0%| | 0.00/436k [00:00<?, ?B/s]
+{'score': 0.6646777987480164, 'start': 16, 'end': 68, 'answer': 'a company that
+provides open-source NLP technologies'}
+[11]: # Text Generation
+generator = pipeline('text-generation', model ='gpt2')
+result = generator("How to learn DataScience , ")
+print(result)
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+[{'generated_text': 'How to learn DataScience , and \xa0to learn How to Use
+Python , which has many additional articles about it in order to show you how to
+3
+
+use Python on your own projects.\nGetting started\nStarting Python on a Mac
+is'}]
+2.0.1 AutoT okenizer Class
+• Purpose: Automatically selects the appropriate tokenizer for a given model.
+• Model Agnostic : Works with any model in the Hugging Face library.
+• Simplifies T okenization: Automatically handles model-specific tokenization nuances.
+Key F eatures:
+• Auto Detection : Identifies the correct tokenizer based on the model name or path. -
+Purpose: Special tokens are used for tasks like classification, separation of sentences, and
+padding
+[15]: from transformers import AutoTokenizer
+# Specify the model checkpoint
+model_checkpoint = 'bert-base-uncased'
+# Load the tokenizer associated with the model
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+# Example text
+text = ["Transformers are incredibly powerful. "," Transformer architecture was ␣
+↪introduced by paper titled as Attention Is All You Need "]
+# Tokenize text
+tokens = tokenizer(text, padding =True, truncation =True, return_tensors ='pt') #␣
+↪'pt' for PyTorch tensors ,'tf' for tensorflow tensors.
+print(tokens)
+{'input_ids': tensor([[ 101, 19081, 2024, 11757, 3928, 1012, 102, 0,
+0, 0,
+0, 0, 0, 0, 0, 0],
+[ 101, 10938, 2121, 4294, 2001, 3107, 2011, 3259, 4159, 2004,
+3086, 2003, 2035, 2017, 2342, 102]]), 'token_type_ids':
+tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask':
+tensor([[1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+[19]: # Example text
+text = "Attention is all you need ? "
+# Tokenize the text
+tokens = tokenizer.tokenize(text)
+print("Tokens:", tokens)
+4
+
+input_ids = tokenizer.convert_tokens_to_ids(tokens)
+print("Input IDs: ", input_ids)
+Tokens: ['attention', 'is', 'all', 'you', 'need', '?']
+Input IDs: [3086, 2003, 2035, 2017, 2342, 1029]
+• Note : The decode method allows us to check how the final output of the tokenizer translates
+back into text.
+[20]: # Convert tokens to token IDs
+token_ids = tokenizer(text, return_tensors ='pt')
+print("Token IDs: ", token_ids)
+print(tokenizer.decode(input_ids))
+Token IDs: {'input_ids': tensor([[ 101, 3086, 2003, 2035, 2017, 2342, 1029,
+102]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask':
+tensor([[1, 1, 1, 1, 1, 1, 1, 1]])}
+attention is all you need?
+2.0.2 Model-Specific T okenizers
+• Model-specific tokenizers are designed to work with specific pre-trained models, handling
+tokenization according to the requirements of each model.
+• BertT okenizer: Adds [CLS] and [SEP] tokens, lowercases the text, and splits words into
+word pieces.
+• GPT2T okenizer: Does not add special tokens by default, uses Byte Pair Encoding ( BPE)
+for tokenization.
+• RobertaT okenizer: Similar to BertTokenizer but designed for RoBERTa model, using a
+different pre-training strategy and vocabulary.
+[21]: from transformers import BertTokenizer
+# Initialize the tokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+# Tokenize a sample text
+inputs = tokenizer("Transformers are incredibly powerful.Transformer ␣
+↪architecture was introduced by paper titled as Attention Is All You Need. ",␣
+↪padding=True, truncation =True, return_tensors ='pt')
+print(inputs)
+{'input_ids': tensor([[ 101, 19081, 2024, 11757, 3928, 1012, 10938, 2121,
+4294, 2001,
+3107, 2011, 3259, 4159, 2004, 3086, 2003, 2035, 2017, 2342,
+1012, 102]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1,
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+5
+
+[23]: from transformers import GPT2Tokenizer
+# Initialize the tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+# Tokenize a sample text
+inputs = tokenizer("Transformers are incredibly powerful.Transformer ␣
+↪architecture was introduced by paper titled as Attention Is All You Need. ", ␣
+↪truncation=True, return_tensors ='pt')
+print(inputs)
+{'input_ids': tensor([[41762, 364, 389, 8131, 3665, 13, 8291, 16354,
+10959, 373,
+5495, 416, 3348, 11946, 355, 47406, 1148, 1439, 921, 10664,
+13]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+[24]: from transformers import RobertaTokenizer
+# Initialize the tokenizer
+tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+# Tokenize a sample text
+inputs = tokenizer("Transformers are incredibly powerful.Transformer ␣
+↪architecture was introduced by paper titled as Attention Is All You Need. ",␣
+↪padding=True, truncation =True, return_tensors ='pt')
+print(inputs)
+tokenizer_config.json: 0%| | 0.00/25.0 [00:00<?, ?B/s]
+vocab.json: 0%| | 0.00/899k [00:00<?, ?B/s]
+merges.txt: 0%| | 0.00/456k [00:00<?, ?B/s]
+tokenizer.json: 0%| | 0.00/1.36M [00:00<?, ?B/s]
+config.json: 0%| | 0.00/481 [00:00<?, ?B/s]
+{'input_ids': tensor([[ 0, 44820, 268, 32, 5784, 2247, 4, 19163,
+22098, 9437,
+21, 2942, 30, 2225, 6593, 25, 35798, 1534, 404, 370,
+10145, 4, 2]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1,
+1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]])}
+2.0.3 AutoModel Class
+• Automatically selects the appropriate model architecture for a given pre-trained model.
+6
+
+[25]: from transformers import AutoTokenizer, AutoModel
+model_checkpoint = 'bert-base-uncased'
+# Initialize the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+# Tokenize a sample text
+inputs = tokenizer("Transformers are incredibly powerful.Transformer ␣
+↪architecture was introduced by paper titled as Attention Is All You Need. ",␣
+↪return_tensors='pt')
+# Initialize the model
+model = AutoModel.from_pretrained(model_checkpoint)
+# Perform a forward pass
+outputs = model(**inputs)
+# Print the outputs
+print(outputs)
+model.safetensors: 0%| | 0.00/440M [00:00<?, ?B/s]
+BaseModelOutputWithPoolingAndCrossAttentions(last_hidden_state=tensor([[[-0.4373
+, -0.1880, -0.0501, …, -0.3524, 0.3885, 0.4059],
+[ 1.1358, -0.1108, -0.2604, …, -0.1590, 0.5482, 0.2014],
+[ 0.3960, 0.5740, 0.6167, …, -0.9803, -0.2217, 0.2105],
+…,
+[ 0.5916, 0.2451, 0.9824, …, -0.2056, -0.1857, 0.1158],
+[ 0.1494, -0.2034, -0.3092, …, 0.3510, -0.0361, -0.5449],
+[-0.3417, 0.2215, 0.6075, …, 0.2352, -0.2933, -0.6688]]],
+grad_fn=<NativeLayerNormBackward0>), pooler_output=tensor([[-0.7596,
+-0.5982, -0.9626, 0.6077, 0.8215, -0.5098, 0.0299, 0.3971,
+-0.8786, -0.9999, -0.6114, 0.9123, 0.9477, 0.5813, 0.6493, -0.5265,
+-0.1432, -0.5665, 0.4537, 0.7179, 0.3886, 1.0000, -0.4341, 0.5272,
+0.4594, 0.9718, -0.7757, 0.7901, 0.8727, 0.6513, -0.4776, 0.5202,
+-0.9812, -0.3715, -0.9658, -0.9745, 0.6813, -0.4002, -0.1906, -0.2413,
+-0.6884, 0.4929, 1.0000, -0.6160, 0.4838, -0.3851, -1.0000, 0.4661,
+-0.5790, 0.9248, 0.8551, 0.9332, 0.4324, 0.6366, 0.6811, -0.6312,
+-0.0933, 0.2943, -0.5627, -0.5775, -0.7217, 0.4747, -0.8575, -0.6710,
+0.9465, 0.9439, -0.4671, -0.5007, -0.3598, 0.2049, 0.5190, 0.4862,
+-0.5637, -0.7402, 0.8280, 0.5783, -0.6846, 1.0000, -0.4216, -0.9265,
+0.9240, 0.8802, 0.6926, -0.7263, 0.8238, -1.0000, 0.6385, -0.3470,
+-0.9657, 0.5236, 0.6680, -0.4337, 0.9254, 0.7159, -0.5706, -0.6608,
+-0.4437, -0.9451, -0.4679, -0.5324, 0.4722, -0.4854, -0.6181, -0.4977,
+0.5375, -0.6001, 0.2936, 0.6854, 0.4468, 0.6355, 0.6098, -0.5435,
+0.5478, -0.8849, 0.6258, -0.4842, -0.9673, -0.6732, -0.9633, 0.3906,
+-0.2328, -0.4992, 0.7878, -0.6414, 0.5562, -0.4621, -0.8929, -1.0000,
+7
+
+-0.5893, -0.5640, -0.4359, -0.5251, -0.9321, -0.9196, 0.6071, 0.8616,
+0.4597, 0.9996, -0.3996, 0.8352, -0.2620, -0.8452, 0.6093, -0.6337,
+0.8406, -0.5166, -0.0598, 0.4076, -0.5127, 0.2569, -0.7199, -0.4940,
+-0.8256, -0.7016, -0.4320, 0.8915, -0.6576, -0.9814, -0.5932, -0.3819,
+-0.2345, 0.6518, 0.7112, 0.3593, -0.5727, 0.5307, 0.1042, 0.5055,
+-0.6034, -0.1124, 0.4784, -0.5345, -0.9377, -0.9469, -0.3761, 0.2532,
+0.9513, 0.3741, 0.4623, 0.6778, -0.4898, 0.4341, -0.9244, 0.9606,
+-0.3321, 0.4132, -0.8492, 0.8170, -0.6223, 0.2266, 0.6096, -0.4759,
+-0.6712, -0.2897, -0.6488, -0.5450, -0.8886, -0.0063, -0.4145, -0.4424,
+-0.2894, 0.8024, 0.7898, 0.1453, 0.6558, 0.5411, -0.6473, -0.1704,
+0.2918, 0.3182, 0.3396, 0.9722, -0.8782, -0.2887, -0.6615, -0.9548,
+0.0994, -0.5617, -0.3772, -0.6285, 0.6724, -0.7669, 0.5625, 0.3856,
+-0.0799, -0.4480, 0.2480, -0.5654, 0.6961, -0.3427, 0.8986, 0.9589,
+-0.5528, -0.4575, 0.9492, -0.9559, -0.7777, 0.0504, -0.4480, 0.6534,
+-0.6721, 0.9765, 0.9029, 0.6236, -0.7674, -0.9014, -0.2971, -0.6468,
+-0.2258, 0.4098, 0.9579, 0.7508, 0.5947, 0.0083, -0.5505, 0.7155,
+-0.8876, -0.9094, -0.9317, -0.2498, -0.9801, 0.8124, 0.4808, 0.7417,
+-0.6074, -0.6347, -0.8623, 0.3946, 0.2741, 0.7693, -0.7341, -0.5117,
+-0.7848, -0.8976, 0.1833, -0.3470, -0.7646, 0.3331, -0.7826, 0.6508,
+0.4800, 0.5092, -0.9428, 0.9632, 1.0000, 0.9023, 0.7415, 0.1690,
+-1.0000, -0.8728, 1.0000, -0.9946, -1.0000, -0.7771, -0.6000, 0.2379,
+-1.0000, -0.3904, -0.1634, -0.6055, 0.8684, 0.9278, 0.7000, -1.0000,
+0.6075, 0.7953, -0.7403, 0.8950, -0.7326, 0.9454, 0.6283, 0.5701,
+-0.3438, 0.5361, -0.9787, -0.6520, -0.7678, -0.9281, 0.9998, 0.2311,
+-0.6365, -0.6030, 0.6823, -0.2298, 0.2623, -0.8851, -0.5238, 0.5672,
+0.6573, 0.4082, 0.5245, -0.3142, 0.5222, 0.6561, 0.1938, 0.6661,
+-0.8050, -0.1729, -0.1210, 0.2377, -0.7869, -0.9565, 0.8605, -0.4807,
+0.7992, 1.0000, 0.7732, -0.5409, 0.7216, 0.3966, -0.0977, 1.0000,
+0.8012, -0.9541, -0.6773, 0.8272, -0.6625, -0.7694, 0.9977, -0.4949,
+-0.9002, -0.4706, 0.9734, -0.9734, 0.9993, -0.4183, -0.8791, 0.8959,
+0.8053, -0.5731, -0.4811, 0.2370, -0.7687, 0.4636, -0.4451, 0.5613,
+0.3340, -0.2150, 0.6359, 0.2420, -0.6738, 0.4065, -0.8754, -0.2666,
+0.9460, 0.5596, -0.4818, 0.3421, -0.4663, -0.6302, -0.8942, 0.7525,
+1.0000, -0.4062, 0.8599, -0.4947, -0.2241, 0.1963, 0.7046, 0.7698,
+-0.4594, -0.5395, 0.8662, -0.5440, -0.9817, 0.2539, 0.4017, -0.2772,
+1.0000, 0.6330, 0.3578, 0.6420, 0.9905, 0.3096, 0.1550, 0.9589,
+0.9531, -0.5267, 0.7016, 0.0887, -0.9361, -0.4364, -0.6240, 0.2451,
+-0.8871, -0.1226, -0.8368, 0.8706, 0.9805, 0.5489, 0.4402, 0.8700,
+1.0000, -0.9581, 0.3011, 0.7996, -0.1344, -1.0000, -0.2604, -0.5042,
+-0.4237, -0.9111, -0.4746, 0.3874, -0.9050, 0.9320, 0.7659, -0.6445,
+-0.9540, -0.7357, 0.3989, 0.2607, -0.9901, -0.4527, -0.5301, 0.4157,
+-0.5109, -0.7522, -0.5332, -0.4943, 0.5756, -0.3629, 0.6648, 0.9437,
+0.5625, -0.9489, -0.5616, -0.3688, -0.6569, 0.6282, -0.4651, -0.9333,
+-0.4742, 1.0000, -0.1570, 0.9275, 0.5814, 0.2191, -0.4149, 0.2701,
+0.9754, 0.5248, -0.8683, -0.9130, 0.8252, -0.5390, 0.5576, 0.8094,
+0.8932, 0.3474, 0.8841, 0.3619, -0.2705, 0.3751, 0.9290, -0.2302,
+-0.3295, -0.2351, -0.2975, -0.3737, 0.5714, 1.0000, 0.5128, 0.7984,
+-0.9778, -0.8583, -0.7448, 1.0000, 0.7989, -0.3732, 0.6023, 0.6668,
+8
+
+-0.4179, 0.1873, -0.4300, -0.4630, 0.4597, 0.4288, 0.9001, -0.6353,
+-0.9539, -0.5937, 0.5514, -0.8790, 1.0000, -0.6405, -0.4098, -0.3207,
+-0.5881, -0.9369, -0.0447, -0.9338, -0.4530, 0.4839, 0.8719, 0.5912,
+-0.7120, -0.7782, 0.9332, 0.7827, -0.9118, -0.8421, 0.8871, -0.8884,
+0.5487, 1.0000, 0.5635, 0.5866, 0.3240, -0.1770, 0.6135, -0.5978,
+0.5986, -0.8399, -0.5669, -0.3977, 0.4667, -0.4283, -0.8922, 0.4647,
+0.5690, -0.6558, -0.6726, -0.3319, 0.6287, 0.6327, -0.3875, -0.2867,
+0.2956, -0.2511, -0.6397, -0.4772, -0.6602, -1.0000, 0.5416, -1.0000,
+0.8579, 0.4732, -0.2465, 0.5673, 0.6885, 0.8353, -0.4132, -0.9577,
+0.0729, 0.5504, -0.4642, -0.3413, -0.5184, 0.4568, -0.3118, 0.1575,
+-0.8414, 0.7930, -0.4958, 1.0000, 0.4881, -0.6137, -0.1653, 0.4213,
+-0.4667, 1.0000, -0.2175, -0.9253, 0.3429, -0.7527, -0.5546, 0.6123,
+0.3511, -0.7456, -0.9491, 0.6768, 0.4377, -0.6763, 0.7061, -0.4485,
+-0.2947, 0.3450, 0.9656, 0.9623, 0.6264, 0.4760, -0.8583, -0.3677,
+0.8938, 0.5081, -0.0311, 0.3098, 1.0000, 0.6015, -0.8019, 0.1574,
+-0.7687, -0.3865, -0.8033, 0.5182, 0.3243, 0.8297, -0.4177, 0.9139,
+-0.9101, 0.1449, -0.5306, -0.7014, 0.4795, -0.8134, -0.9678, -0.9512,
+0.6163, -0.4243, -0.1443, 0.4130, 0.2496, 0.5648, 0.4427, -1.0000,
+0.8712, 0.5426, 0.9586, 0.8663, 0.7161, 0.6406, 0.5432, -0.9481,
+-0.2047, -0.5641, -0.3325, 0.2550, 0.6649, 0.6649, 0.4156, -0.6352,
+-0.7262, -0.8371, -0.8796, -0.9660, 0.5601, -0.7732, -0.2982, 0.9267,
+0.1917, -0.2466, -0.4193, -0.9406, 0.2313, 0.6056, -0.0980, 0.2714,
+0.3997, 0.5923, 0.6499, 0.9473, -0.9453, 0.5849, -0.8713, 0.5620,
+0.9064, -0.9177, 0.5641, 0.6364, -0.3661, 0.4531, -0.4216, -0.1900,
+0.7940, -0.4969, 0.4698, -0.4810, -0.2095, -0.4797, -0.4256, -0.5836,
+-0.4899, 0.6178, 0.1629, 0.7428, 0.9466, -0.4348, -0.4315, -0.4088,
+-0.8996, -0.8286, 0.2621, -0.1498, -0.5843, 0.8581, 0.0729, 0.9623,
+0.3976, -0.4583, -0.5143, -0.6434, 0.5533, -0.7457, -0.7435, -0.6392,
+0.4527, 0.6160, 1.0000, -0.8795, -0.9398, -0.4694, -0.4642, 0.5022,
+-0.3684, -1.0000, 0.3653, -0.7796, 0.8565, -0.6110, 0.8892, -0.6996,
+-0.7722, -0.5156, 0.8072, 0.8815, -0.6605, -0.5472, 0.5611, -0.6636,
+0.9801, 0.4653, -0.7691, -0.2212, 0.6946, -0.9655, -0.5884,
+0.5187]],
+grad_fn=<TanhBackward0>), hidden_states=None, past_key_values=None,
+attentions=None, cross_attentions=None)
+• Note : The output is not the final predictions here but rather the hidden states or embeddings
+produced by the model. These outputs can be used as features for further processing or as
+input to other layers.
+2.0.4 Custom Classification Model Using AutoModel
+• Purpose:
+• Use AutoModel and add a custom classification head for specific tasks like sequence classifi-
+cation.
+[27]: import torch
+import torch.nn as nn
+9
+
+import torch.nn.functional as F
+from transformers import AutoTokenizer, AutoModel
+# Define a custom classification model
+class CustomClassificationModel(nn.Module):
+def __init__(self, model_checkpoint, num_labels):
+super(CustomClassificationModel, self).__init__()
+self.automodel = AutoModel.from_pretrained(model_checkpoint)
+self.classifier = nn.Linear(self.automodel.config.hidden_size,␣
+↪num_labels)
+def forward(self, input_ids, attention_mask =None, token_type_ids =None):
+outputs = self.automodel(input_ids, attention_mask =attention_mask,␣
+↪token_type_ids=token_type_ids)
+# Get the hidden state of the [CLS] token
+cls_output = outputs.last_hidden_state[:, 0, :]
+logits = self.classifier(cls_output)
+return logits
+# Model checkpoint and number of labels
+model_checkpoint = 'bert-base-uncased'
+num_labels = 2 # Example for binary classification
+# Initialize the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+# Tokenize a sample text
+inputs = tokenizer("Hello, this is an example using a custom classification ␣
+↪head", return_tensors ='pt')
+# Initialize the custom model
+model = CustomClassificationModel(model_checkpoint, num_labels)
+# Perform a forward pass
+logits = model(**inputs)
+# Apply softmax to get probabilities
+probabilities = F.softmax(logits, dim =-1)
+# Convert probabilities to predicted class labels
+predictions = torch.argmax(probabilities, dim =-1)
+# Print the probabilities and the predicted class
+print(probabilities)
+print(predictions)
+tensor([[0.5535, 0.4465]], grad_fn=<SoftmaxBackward0>)
+10
+
+tensor([0])
+3 AutoModelFor** Classes
+• Purpose:
+– Automatically select the appropriate model architecture with a task-specific head for
+various NLP tasks.
+4 Common AutoModelFor Classes:
+1. AutoModelF orSequenceClassification:
+• Used for tasks like text classification and sentiment analysis.
+2. AutoModelF orCausalLM:
+• Used for tasks like language modeling and text generation.
+[28]: from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch.nn.functional as F
+import torch
+# Initialize the tokenizer and model
+model_checkpoint = 'bert-base-uncased'
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint)
+# Tokenize input text
+inputs = tokenizer("Hello, this is an example for sequence classification. ",␣
+↪return_tensors='pt')
+# Perform a forward pass
+outputs = model(**inputs)
+logits = outputs.logits
+# Apply softmax to get probabilities
+probabilities = F.softmax(logits, dim =-1)
+predictions = torch.argmax(probabilities, dim =-1)
+# Print the probabilities and predicted class
+print(probabilities)
+print(predictions)
+Some weights of BertForSequenceClassification were not initialized from the
+model checkpoint at bert-base-uncased and are newly initialized:
+['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it
+for predictions and inference.
+tensor([[0.5861, 0.4139]], grad_fn=<SoftmaxBackward0>)
+tensor([0])
+11
+
+[30]: # AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM # Token level ␣
+↪classification
+# Initialize the tokenizer and model
+model_checkpoint = 'gpt2'
+tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
+model = AutoModelForCausalLM.from_pretrained(model_checkpoint)
+# Tokenize input text
+inputs = tokenizer("In 1990 's", return_tensors ='pt')
+# Generate text
+outputs = model.generate(inputs['input_ids'], max_length =50,␣
+↪num_return_sequences=1)
+# Decode and print the generated text
+generated_text = tokenizer.decode(outputs[0], skip_special_tokens =True)
+print(generated_text)
+The attention mask and the pad token id were not set. As a consequence, you may
+observe unexpected behavior. Please pass your input's `attention_mask` to obtain
+reliable results.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+In 1990's, the U.S. government began to use the term "global warming" to
+describe the effects of global warming. The term "global warming" was coined by
+the U.S. government in the late 1990s.
+4.0.1 Model-Specific Classes
+Model-specific classes in Hugging Face Transformers are designed to handle specific NLP tasks by
+adding the appropriate heads to pre-trained models. These classes simplify the use of models for
+tasks like text classification, text generation, and token classification.
+[37]: from transformers import BertTokenizer, BertForSequenceClassification
+import torch
+# Load the tokenizer and model
+model_checkpoint = 'bert-base-uncased'
+tokenizer = BertTokenizer.from_pretrained(model_checkpoint)
+model = BertForSequenceClassification.from_pretrained(model_checkpoint)
+# Define labels (these are examples; adjust based on your actual model's ␣
+↪training)
+12
+
+labels = ["Negative", "Positive"]
+# Input sentences
+sentences = [
+"It is amazing to see how Transformer has revolutionized the world of ␣
+↪generative AI . ",
+"I am in love with hugging face for providing open source LLM 's "
+]
+# Tokenize and encode the sentences
+inputs = tokenizer(sentences, padding =True, truncation =True,␣
+↪return_tensors='pt')
+# Perform a forward pass and get logits
+outputs = model(**inputs).logits
+# Apply softmax to get probabilities
+probabilities = torch.nn.functional.softmax(outputs, dim =-1)
+# Get the predicted class
+predictions = torch.argmax(probabilities, dim =-1)
+# Print the probabilities and predicted classes
+for i, sentence in enumerate(sentences):
+print(f"Sentence: {sentence}")
+print(f"Probabilities: {probabilities[i].tolist()}")
+print(f"Predicted Class: {labels[predictions[i]]}")
+Some weights of BertForSequenceClassification were not initialized from the
+model checkpoint at bert-base-uncased and are newly initialized:
+['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it
+for predictions and inference.
+Sentence: It is amazing to see how Transformer has revolutionized the world of
+generative AI .
+Probabilities: [0.2588583528995514, 0.7411417365074158]
+Predicted Class: Positive
+Sentence: I am in love with hugging face for providing open source LLM's
+Probabilities: [0.2794351279735565, 0.7205649018287659]
+Predicted Class: Positive
+[41]: # GPT2LMHeadModel
+from transformers import GPT2Tokenizer, GPT2LMHeadModel
+# Load the tokenizer and model
+13
+
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+model = GPT2LMHeadModel.from_pretrained('gpt2')
+# Input prompt
+prompt = "Define Machine learning "
+# Tokenize and encode the prompt
+inputs = tokenizer(prompt, return_tensors ='pt')
+# Generate text
+outputs = model.generate(inputs['input_ids'], max_length =50,␣
+↪num_return_sequences=1)
+# Decode and print the generated text
+generated_text = tokenizer.decode(outputs[0], skip_special_tokens =True)
+print("Generated Text: ", generated_text)
+The attention mask and the pad token id were not set. As a consequence, you may
+observe unexpected behavior. Please pass your input's `attention_mask` to obtain
+reliable results.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Generated Text: Define Machine learning  (MML) is a new approach to machine
+learning that uses a set of algorithms to predict the future. It is a new
+approach to machine learning that uses a set of algorithms to predict the
+future. It is a
+4.0.2 AutoConfig Class
+Purpose: The AutoConfig class in Hugging Face Transformers is used to automatically load the
+configuration of a pre-trained model. This configuration includes model architecture details and
+hyperparameters, which are essential for initializing models correctly.
+[42]: from transformers import AutoConfig
+# Load configuration for a specific model checkpoint
+model_checkpoint = 'bert-base-uncased'
+config = AutoConfig.from_pretrained(model_checkpoint)
+# Print the configuration
+print(config)
+BertConfig {
+"_name_or_path": "bert-base-uncased",
+"architectures": [
+"BertForMaskedLM"
+],
+"attention_probs_dropout_prob": 0.1,
+14
+
+"classifier_dropout": null,
+"gradient_checkpointing": false,
+"hidden_act": "gelu",
+"hidden_dropout_prob": 0.1,
+"hidden_size": 768,
+"initializer_range": 0.02,
+"intermediate_size": 3072,
+"layer_norm_eps": 1e-12,
+"max_position_embeddings": 512,
+"model_type": "bert",
+"num_attention_heads": 12,
+"num_hidden_layers": 12,
+"pad_token_id": 0,
+"position_embedding_type": "absolute",
+"transformers_version": "4.42.4",
+"type_vocab_size": 2,
+"use_cache": true,
+"vocab_size": 30522
+}
+4.0.3 Model-Specific Configuration Classes
+Purpose: Model-specific configuration classes in Hugging Face Transformers are used to define
+the architecture and hyperparameters for specific models. These configurations are essential for
+initializing models correctly and can be customized to suit specific needs.
+[43]: # BERT Configuration
+from transformers import BertConfig, BertForSequenceClassification
+# Load and modify the BERT configuration
+config = BertConfig.from_pretrained('bert-base-uncased')
+config.num_labels = 5 # Change the number of labels for classification
+# Initialize the BERT model with the modified configuration
+model = BertForSequenceClassification(config)
+# Print the model
+print(model)
+BertForSequenceClassification(
+(bert): BertModel(
+(embeddings): BertEmbeddings(
+(word_embeddings): Embedding(30522, 768, padding_idx=0)
+(position_embeddings): Embedding(512, 768)
+(token_type_embeddings): Embedding(2, 768)
+(LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+(dropout): Dropout(p=0.1, inplace=False)
+15
+
+)
+(encoder): BertEncoder(
+(layer): ModuleList(
+(0-11): 12 x BertLayer(
+(attention): BertAttention(
+(self): BertSdpaSelfAttention(
+(query): Linear(in_features=768, out_features=768, bias=True)
+(key): Linear(in_features=768, out_features=768, bias=True)
+(value): Linear(in_features=768, out_features=768, bias=True)
+(dropout): Dropout(p=0.1, inplace=False)
+)
+(output): BertSelfOutput(
+(dense): Linear(in_features=768, out_features=768, bias=True)
+(LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+(dropout): Dropout(p=0.1, inplace=False)
+)
+)
+(intermediate): BertIntermediate(
+(dense): Linear(in_features=768, out_features=3072, bias=True)
+(intermediate_act_fn): GELUActivation()
+)
+(output): BertOutput(
+(dense): Linear(in_features=3072, out_features=768, bias=True)
+(LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+(dropout): Dropout(p=0.1, inplace=False)
+)
+)
+)
+)
+(pooler): BertPooler(
+(dense): Linear(in_features=768, out_features=768, bias=True)
+(activation): Tanh()
+)
+)
+(dropout): Dropout(p=0.1, inplace=False)
+(classifier): Linear(in_features=768, out_features=5, bias=True)
+)
+4.0.4 Dataset Class
+Purpose: The Dataset class in the Hugging Face datasets library is used to handle and ma-
+nipulate datasets efficiently. It supports a wide range of operations for loading, processing, and
+transforming datasets, making it easier to prepare data for machine learning models.
+[1]: %%capture
+!pip install datasets
+!pip install zstandard
+16
+
+[2]: from datasets import load_dataset
+# Load a dataset from the Hugging Face Hub
+dataset = load_dataset('imdb')
+/usr/local/lib/python3.10/dist-packages/huggingface_hub/utils/_token.py:89:
+UserWarning:
+The secret `HF_TOKEN` does not exist in your Colab secrets.
+To authenticate with the Hugging Face Hub, create a token in your settings tab
+(https://huggingface.co/settings/tokens), set it as secret in your Google Colab
+and restart your session.
+You will be able to reuse this secret in all of your notebooks.
+Please note that authentication is recommended but still optional to access
+public models or datasets.
+warnings.warn(
+Downloading readme: 0%| | 0.00/7.81k [00:00<?, ?B/s]
+Downloading data: 0%| | 0.00/21.0M [00:00<?, ?B/s]
+Downloading data: 0%| | 0.00/20.5M [00:00<?, ?B/s]
+Downloading data: 0%| | 0.00/42.0M [00:00<?, ?B/s]
+Generating train split: 0%| | 0/25000 [00:00<?, ? examples/s]
+Generating test split: 0%| | 0/25000 [00:00<?, ? examples/s]
+Generating unsupervised split: 0%| | 0/50000 [00:00<?, ? examples/s]
+[3]: dataset
+[3]: DatasetDict({
+train: Dataset({
+features: ['text', 'label'],
+num_rows: 25000
+})
+test: Dataset({
+features: ['text', 'label'],
+num_rows: 25000
+})
+unsupervised: Dataset({
+features: ['text', 'label'],
+num_rows: 50000
+})
+})
+[4]: train_subset = dataset['train'].select(range(10000))
+[5]: train_subset
+17
+
+[5]: Dataset({
+features: ['text', 'label'],
+num_rows: 10000
+})
+[7]: dataset['train'][0:3]
+[7]: {'text': ['I rented I AM CURIOUS-YELLOW from my video store because of all the
+controversy that surrounded it when it was first released in 1967. I also heard
+that at first it was seized by U.S. customs if it ever tried to enter this
+country, therefore being a fan of films considered "controversial" I really had
+to see this for myself.<br /><br />The plot is centered around a young Swedish
+drama student named Lena who wants to learn everything she can about life. In
+particular she wants to focus her attentions to making some sort of documentary
+on what the average Swede thought about certain political issues such as the
+Vietnam War and race issues in the United States. In between asking politicians
+and ordinary denizens of Stockholm about their opinions on politics, she has sex
+with her drama teacher, classmates, and married men.<br /><br />What kills me
+about I AM CURIOUS-YELLOW is that 40 years ago, this was considered
+pornographic. Really, the sex and nudity scenes are few and far between, even
+then it\'s not shot like some cheaply made porno. While my countrymen mind find
+it shocking, in reality sex and nudity are a major staple in Swedish cinema.
+Even Ingmar Bergman, arguably their answer to good old boy John Ford, had sex
+scenes in his films.<br /><br />I do commend the filmmakers for the fact that
+any sex shown in the film is shown for artistic purposes rather than just to
+shock people and make money to be shown in pornographic theaters in America. I
+AM CURIOUS-YELLOW is a good film for anyone wanting to study the meat and
+potatoes (no pun intended) of Swedish cinema. But really, this film doesn\'t
+have much of a plot.',
+'"I Am Curious: Yellow" is a risible and pretentious steaming pile. It
+doesn\'t matter what one\'s political views are because this film can hardly be
+taken seriously on any level. As for the claim that frontal male nudity is an
+automatic NC-17, that isn\'t true. I\'ve seen R-rated films with male nudity.
+Granted, they only offer some fleeting views, but where are the R-rated films
+with gaping vulvas and flapping labia? Nowhere, because they don\'t exist. The
+same goes for those crappy cable shows: schlongs swinging in the breeze but not
+a clitoris in sight. And those pretentious indie movies like The Brown Bunny, in
+which we\'re treated to the site of Vincent Gallo\'s throbbing johnson, but not
+a trace of pink visible on Chloe Sevigny. Before crying (or implying) "double-
+standard" in matters of nudity, the mentally obtuse should take into account one
+unavoidably obvious anatomical difference between men and women: there are no
+genitals on display when actresses appears nude, and the same cannot be said for
+a man. In fact, you generally won\'t see female genitals in an American film in
+anything short of porn or explicit erotica. This alleged double-standard is less
+a double standard than an admittedly depressing ability to come to terms
+culturally with the insides of women\'s bodies.',
+"If only to avoid making this type of film in the future. This film is
+18
+
+interesting as an experiment but tells no cogent story.<br /><br />One might
+feel virtuous for sitting thru it because it touches on so many IMPORTANT issues
+but it does so without any discernable motive. The viewer comes away with no new
+perspectives (unless one comes up with one while one's mind wanders, as it will
+invariably do during this pointless film).<br /><br />One might better spend
+one's time staring out a window at a tree growing.<br /><br />"],
+'label': [0, 0, 0]}
+[8]: dataset['train'].features
+[8]: {'text': Value(dtype='string', id=None),
+'label': ClassLabel(names=['neg', 'pos'], id=None)}
+[9]: # Split the dataset into training and test sets
+split_dataset = dataset['train'].train_test_split(test_size=0.1)
+train_data = split_dataset['train']
+test_data = split_dataset['test']
+4.0.5 T rainingArguments Class
+Purpose: The TrainingArguments class in the Hugging Face Transformers library is used to
+specify various hyperparameters and configurations for the training process. It allows you to cus-
+tomize the training setup, including learning rate, batch size, number of epochs, and more.
+Example Usage: “‘python from transformers import TrainingArguments
+5 Define the training arguments
+training_args = TrainingArguments( output_dir=‘ ./results’, # Directory to save the model check-
+points evaluation_strategy=‘epoch’, # Evaluate at the end of every epoch learning_rate=2e-5,
+# Learning rate for the optimizer per_device_train_batch_size=8, # Batch size for training
+per_device_eval_batch_size=8, # Batch size for evaluation num_train_epochs=3, # Number of
+training epochs weight_decay=0.01, # Weight decay for the optimizer logging_dir=‘ ./logs’, # Di-
+rectory to save the logs logging_steps=10, # Log training metrics every 10 steps save_steps=500,
+# Save model checkpoint every 500 steps save_total_limit=2, # Limit the total number of check-
+points )
+[ ]:
+19

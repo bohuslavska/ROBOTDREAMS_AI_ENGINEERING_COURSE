@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+.git/
+.gitignore
+
+# Data
+data/raw/
+pluperfect_grac/
+
+# Models
+models/adapters/*/
+
+# MLflow
+mlruns/
+
+# Dev
+.idea/
+.vscode/
+*.swp
+.DS_Store

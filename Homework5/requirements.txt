@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic-settings
+
+sentence-transformers
+qdrant-client
+tiktoken
+pypdf
+openai
+redis
+langfuse

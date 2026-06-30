@@ -1,0 +1,32 @@
+{
+  "family": "whiner-ui",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "ui",
+      "image": "YOUR_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/whiner-ui:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8501,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {"name": "API_URL", "value": "http://YOUR_ALB_DNS:8080"}
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/whiner-ui",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ui"
+        }
+      }
+    }
+  ]
+}

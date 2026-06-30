@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "github-stats": {
+      "command": "/absolute/path/to/github-stats-mcp/.venv/bin/python",
+      "args": [
+        "/absolute/path/to/github-stats-mcp/server.py"
+      ]
+    }
+  }
+}

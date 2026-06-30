@@ -1,0 +1,45 @@
+{
+  "family": "whiner-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "api",
+      "image": "YOUR_ACCOUNT_ID.dkr.ecr.eu-central-1.amazonaws.com/whiner-api:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {"name": "INFERENCE_MODE", "value": "remote"},
+        {"name": "INFERENCE_SERVICE_URL", "value": "http://10.0.1.50:8080"},
+        {"name": "INFERENCE_TIMEOUT", "value": "120"},
+        {"name": "MODEL_VERSION", "value": "qwen3-8b-lora-v2"},
+        {"name": "FALLBACK_MESSAGE", "value": "Ой лихо, моделі розгубила"},
+        {"name": "STORE_USER_INPUTS", "value": "true"},
+        {"name": "DATABASE_URL", "value": "postgresql+psycopg2://postgres:PASSWORD@RDS_ENDPOINT:5432/whining"}
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/whiner-api",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "api"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

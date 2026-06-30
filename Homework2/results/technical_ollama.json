@@ -1,0 +1,57 @@
+{
+  "dataset": "technical",
+  "provider": "ollama",
+  "json_valid": true,
+  "result": {
+    "summary": "Summary of the meeting about the new architecture.",
+    "tasks": [
+      {
+        "owner": "Bogdan",
+        "task": "Split monolithic backend into microservices, starting with auth service.",
+        "deadline": "22 May"
+      },
+      {
+        "owner": "Roman",
+        "task": "Implement JWT with refresh tokens for auth service using FastAPI.",
+        "deadline": "22 May"
+      },
+      {
+        "owner": "Solomia",
+        "task": "Prepare Helm charts and Istio configuration for new services and deployment on Kubernetes.",
+        "deadline": "19 May"
+      },
+      {
+        "owner": "Natalia",
+        "task": "Perform threat modeling and implement mTLS between services.",
+        "deadline": "25 May"
+      }
+    ],
+    "decisions": [
+      {
+        "decision": "Adopt event-driven architecture through Kafka for asynchronous communication between services."
+      },
+      {
+        "decision": "Use PostgreSQL as the primary database, but each service will have its own schema."
+      },
+      {
+        "decision": "Implement Redis for caching and sessions."
+      },
+      {
+        "decision": "Use Kong as the API Gateway."
+      },
+      {
+        "decision": "Implement mTLS for internal traffic."
+      },
+      {
+        "decision": "Use Prometheus and Grafana for monitoring."
+      }
+    ]
+  },
+  "latency": 343.1,
+  "tokens_in": 405,
+  "tokens_out": 200,
+  "tokens_total": 605,
+  "cost_usd": 0.0,
+  "error": null,
+  "notes": "BROKE LANGUAGE INSTRUCTION — responded fully in English (Bogdan, Solomia, Roman, Natalia) instead of Ukrainian. Only 4/6 tasks (missed Соломія monitoring task). Invented Bogdan as a separate task owner from his introduction. Decisions returned as objects."
+}

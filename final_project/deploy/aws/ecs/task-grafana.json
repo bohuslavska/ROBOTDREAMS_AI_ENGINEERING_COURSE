@@ -1,0 +1,29 @@
+{
+  "family": "whiner-grafana",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "grafana",
+      "image": "grafana/grafana:11.1.0",
+      "essential": true,
+      "portMappings": [{"containerPort": 3000, "protocol": "tcp"}],
+      "environment": [
+        {"name": "GF_SECURITY_ADMIN_USER", "value": "admin"},
+        {"name": "GF_SECURITY_ADMIN_PASSWORD", "value": "CHANGE_ME"},
+        {"name": "GF_USERS_ALLOW_SIGN_UP", "value": "false"}
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/whiner-grafana",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "grafana"
+        }
+      }
+    }
+  ]
+}

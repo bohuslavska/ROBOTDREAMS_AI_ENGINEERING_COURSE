@@ -1,0 +1,15 @@
+adapter_path: /Users/katerynaboguslavska/Desktop/Data_Science/ai-engineering/lesson
+  17 - llm-fine-tuning-in-production/homework/adapters
+batch_size: 2
+data: /Users/katerynaboguslavska/Desktop/Data_Science/ai-engineering/lesson 17 - llm-fine-tuning-in-production/homework/mlx_data
+iters: 405
+learning_rate: 2.0e-05
+lora_parameters:
+  dropout: 0.0
+  rank: 16
+  scale: 20.0
+mask_prompt: true
+model: mlx-community/Meta-Llama-3.1-8B-Instruct-4bit
+num_layers: 8
+save_every: 100
+train: true

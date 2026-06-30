@@ -1,0 +1,28 @@
+# GPU inference service for AWS (g5.xlarge / g4dn.xlarge)
+# Build: docker build -f Dockerfile.inference -t whiner-inference .
+# Run:   docker run --gpus all -p 8081:8080 -v ./models:/app/models whiner-inference
+
+FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-inference.txt .
+RUN pip install --no-cache-dir -r requirements-inference.txt
+
+COPY app/inference_server/ ./app/inference_server/
+COPY app/__init__.py ./app/__init__.py
+
+ENV USE_MLX=false
+ENV BASE_MODEL=Qwen/Qwen3-8B
+ENV LORA_ADAPTER_PATH=/app/models/adapters/qwen3-8b-lora-v2
+ENV MODEL_VERSION=qwen3-8b-lora-v2
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=5 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+CMD ["uvicorn", "app.inference_server.server:app", "--host", "0.0.0.0", "--port", "8080"]

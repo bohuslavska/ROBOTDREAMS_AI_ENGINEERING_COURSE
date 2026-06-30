@@ -1,0 +1,859 @@
+{
+  "model": "gpt-4o-mini",
+  "n_examples": 30,
+  "json_valid_rate": 1.0,
+  "exact_match_rate": 0.2,
+  "field_accuracy": {
+    "customer_name": 0.9333,
+    "product": 0.9333,
+    "issue_category": 0.8,
+    "urgency": 0.4333,
+    "summary": 0.7667
+  },
+  "avg_input_tokens": 103.9,
+  "avg_output_tokens": 51.4,
+  "total_input_tokens": 3118,
+  "total_output_tokens": 1543,
+  "details": [
+    {
+      "i": 1,
+      "email": "Hi, can you tell me when the next maintenance window for Pro Plan is? — A.",
+      "expected": {
+        "customer_name": null,
+        "product": "Pro Plan",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Maintenance window schedule inquiry"
+      },
+      "raw_output": "{\n  \"customer_name\": \"A.\",\n  \"product\": \"Pro Plan\",\n  \"issue_category\": \"other\",\n  \"urgency\": \"low\",\n  \"summary\": \"Customer inquires about the next maintenance window for Pro Plan.\"\n}",
+      "predicted": {
+        "customer_name": "A.",
+        "product": "Pro Plan",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Customer inquires about the next maintenance window for Pro Plan."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": false,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 2,
+      "email": "Hello, two things: (1) my Pro Plan was double charged this month, (2) also dark mode would be nice. Refund is priority. — Maria Bondarenko",
+      "expected": {
+        "customer_name": "Maria Bondarenko",
+        "product": "Pro Plan",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Duplicate Pro Plan charge with secondary dark mode feature request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Maria Bondarenko\",\n  \"product\": \"Pro Plan\",\n  \"issue_category\": \"billing\",\n  \"urgency\": \"high\",\n  \"summary\": \"Double charged for Pro Plan and requesting a refund.\"\n}",
+      "predicted": {
+        "customer_name": "Maria Bondarenko",
+        "product": "Pro Plan",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Double charged for Pro Plan and requesting a refund."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": false
+      }
+    },
+    {
+      "i": 3,
+      "email": "Production is down. API Access returns 500 on every call. Customers complaining. — DevOps team @ Acme",
+      "expected": {
+        "customer_name": null,
+        "product": "API Access",
+        "issue_category": "technical",
+        "urgency": "critical",
+        "summary": "Production down, API returning 500"
+      },
+      "raw_output": "{\n  \"customer_name\": \"DevOps team @ Acme\",\n  \"product\": \"API Access\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"critical\",\n  \"summary\": \"Production is down with API Access returning 500 errors.\"\n}",
+      "predicted": {
+        "customer_name": "DevOps team @ Acme",
+        "product": "API Access",
+        "issue_category": "technical",
+        "urgency": "critical",
+        "summary": "Production is down with API Access returning 500 errors."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": false,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 4,
+      "email": "Oh great, my Premium Plan got cancelled AGAIN without notice. Third time this year. Wonderful service. — Robert Johnson",
+      "expected": {
+        "customer_name": "Robert Johnson",
+        "product": "Premium Plan",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Recurring unexpected cancellation of Premium Plan"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Robert Johnson\",\n  \"product\": \"Premium Plan\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"high\",\n  \"summary\": \"The Premium Plan was cancelled again without notice.\"\n}",
+      "predicted": {
+        "customer_name": "Robert Johnson",
+        "product": "Premium Plan",
+        "issue_category": "account",
+        "urgency": "high",
+        "summary": "The Premium Plan was cancelled again without notice."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 5,
+      "email": "Hi, your software keeps freezing on my laptop. Worked fine before update. — David Kim",
+      "expected": {
+        "customer_name": "David Kim",
+        "product": "Desktop App",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Desktop app freezing after update"
+      },
+      "raw_output": "{\n  \"customer_name\": \"David Kim\",\n  \"product\": \"software\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"high\",\n  \"summary\": \"The software keeps freezing after the latest update.\"\n}",
+      "predicted": {
+        "customer_name": "David Kim",
+        "product": "software",
+        "issue_category": "technical",
+        "urgency": "high",
+        "summary": "The software keeps freezing after the latest update."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": false,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 6,
+      "email": "Привіт! I cannot login to Mobile App. Password is correct. Дякую. — Iryna",
+      "expected": {
+        "customer_name": "Iryna",
+        "product": "Mobile App",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Mobile App login failure with correct password"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Iryna\",\n  \"product\": \"Mobile App\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"high\",\n  \"summary\": \"Customer cannot login to the Mobile App despite having the correct password.\"\n}",
+      "predicted": {
+        "customer_name": "Iryna",
+        "product": "Mobile App",
+        "issue_category": "account",
+        "urgency": "high",
+        "summary": "Customer cannot login to the Mobile App despite having the correct password."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 7,
+      "email": "Why is my Pro Plan slower than my friend's Pro Plan? Are different tiers throttled? — Sarah Lee",
+      "expected": {
+        "customer_name": "Sarah Lee",
+        "product": "Pro Plan",
+        "issue_category": "billing",
+        "urgency": "low",
+        "summary": "Question about throttling differences between Pro Plan accounts"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Sarah Lee\",\n  \"product\": \"Pro Plan\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Customer is experiencing slower performance on their Pro Plan compared to a friend's.\"\n}",
+      "predicted": {
+        "customer_name": "Sarah Lee",
+        "product": "Pro Plan",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Customer is experiencing slower performance on their Pro Plan compared to a friend's."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": false,
+        "summary": false
+      }
+    },
+    {
+      "i": 8,
+      "email": "Cancel my account please. Premium Plan.",
+      "expected": {
+        "customer_name": null,
+        "product": "Premium Plan",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Account cancellation request for Premium Plan"
+      },
+      "raw_output": "{\n  \"customer_name\": null,\n  \"product\": \"Premium Plan\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request to cancel account.\"\n}",
+      "predicted": {
+        "customer_name": null,
+        "product": "Premium Plan",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Request to cancel account."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 9,
+      "email": "Love Analytics Add-on! Quick question — can it be customized per team? Thanks — Bohdan",
+      "expected": {
+        "customer_name": "Bohdan",
+        "product": "Analytics Add-on",
+        "issue_category": "feature_request",
+        "urgency": "low",
+        "summary": "Per-team customization for Analytics Add-on"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Bohdan\",\n  \"product\": \"Analytics Add-on\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Customer is inquiring about customization options for the Analytics Add-on per team.\"\n}",
+      "predicted": {
+        "customer_name": "Bohdan",
+        "product": "Analytics Add-on",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Customer is inquiring about customization options for the Analytics Add-on per team."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 10,
+      "email": "URGENT URGENT URGENT my Enterprise Plan account locked, send help, all caps because EMERGENCY!!! — JOHN SMITH",
+      "expected": {
+        "customer_name": "JOHN SMITH",
+        "product": "Enterprise Plan",
+        "issue_category": "account",
+        "urgency": "critical",
+        "summary": "Enterprise Plan account locked, urgent reactivation"
+      },
+      "raw_output": "{\n  \"customer_name\": \"JOHN SMITH\",\n  \"product\": \"Enterprise Plan\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"critical\",\n  \"summary\": \"Account locked and requires immediate assistance.\"\n}",
+      "predicted": {
+        "customer_name": "JOHN SMITH",
+        "product": "Enterprise Plan",
+        "issue_category": "account",
+        "urgency": "critical",
+        "summary": "Account locked and requires immediate assistance."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": false
+      }
+    },
+    {
+      "i": 11,
+      "email": "Hello support team, I cancelled my Premium Plan subscription last week but I just got billed again today. This is unacceptable. Please refund immediately and confirm cancellation. Best, John",
+      "expected": {
+        "customer_name": "John",
+        "product": "Premium Plan",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Billed after cancellation, refund and cancellation confirmation requested"
+      },
+      "raw_output": "{\n  \"customer_name\": \"John\",\n  \"product\": \"Premium Plan\",\n  \"issue_category\": \"billing\",\n  \"urgency\": \"high\",\n  \"summary\": \"Customer was billed after canceling subscription and requests a refund.\"\n}",
+      "predicted": {
+        "customer_name": "John",
+        "product": "Premium Plan",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Customer was billed after canceling subscription and requests a refund."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 12,
+      "email": "My company needs an invoice with our VAT number for Analytics Add-on. Can you re-issue last month's invoice? — Andriy Moore",
+      "expected": {
+        "customer_name": "Andriy Moore",
+        "product": "Analytics Add-on",
+        "issue_category": "billing",
+        "urgency": "medium",
+        "summary": "Re-issued invoice with VAT number requested"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Andriy Moore\",\n  \"product\": \"Analytics Add-on\",\n  \"issue_category\": \"billing\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request to re-issue last month's invoice with VAT number.\"\n}",
+      "predicted": {
+        "customer_name": "Andriy Moore",
+        "product": "Analytics Add-on",
+        "issue_category": "billing",
+        "urgency": "medium",
+        "summary": "Request to re-issue last month's invoice with VAT number."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 13,
+      "email": "Hi, I was charged twice for Analytics Add-on this month. My card shows two charges of $29.99 on the same day. Please refund the duplicate. — Ivan",
+      "expected": {
+        "customer_name": "Ivan",
+        "product": "Analytics Add-on",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Duplicate charge for Analytics Add-on, refund requested"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Ivan\",\n  \"product\": \"Analytics Add-on\",\n  \"issue_category\": \"billing\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Customer was charged twice for the Analytics Add-on and requests a refund.\"\n}",
+      "predicted": {
+        "customer_name": "Ivan",
+        "product": "Analytics Add-on",
+        "issue_category": "billing",
+        "urgency": "medium",
+        "summary": "Customer was charged twice for the Analytics Add-on and requests a refund."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 14,
+      "email": "Hello support team, I cancelled my Desktop App subscription last week but I just got billed again today. This is unacceptable. Please refund immediately and confirm cancellation. Best, Lisa Pavlenko",
+      "expected": {
+        "customer_name": "Lisa Pavlenko",
+        "product": "Desktop App",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Billed after cancellation, refund and cancellation confirmation requested"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Lisa Pavlenko\",\n  \"product\": \"Desktop App\",\n  \"issue_category\": \"billing\",\n  \"urgency\": \"high\",\n  \"summary\": \"Customer was billed after cancellation and requests an immediate refund.\"\n}",
+      "predicted": {
+        "customer_name": "Lisa Pavlenko",
+        "product": "Desktop App",
+        "issue_category": "billing",
+        "urgency": "high",
+        "summary": "Customer was billed after cancellation and requests an immediate refund."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 15,
+      "email": "Webhook deliveries for Priority Support are failing with timeout errors. Retry logic broken? — Michael Wilson",
+      "expected": {
+        "customer_name": "Michael Wilson",
+        "product": "Priority Support",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Priority Support webhook delivery timeouts"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Michael Wilson\",\n  \"product\": \"Priority Support\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"high\",\n  \"summary\": \"Webhook deliveries are failing with timeout errors.\"\n}",
+      "predicted": {
+        "customer_name": "Michael Wilson",
+        "product": "Priority Support",
+        "issue_category": "technical",
+        "urgency": "high",
+        "summary": "Webhook deliveries are failing with timeout errors."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": false
+      }
+    },
+    {
+      "i": 16,
+      "email": "Webhook deliveries for Premium Plan are failing with timeout errors. Retry logic broken? — Sergii Jackson",
+      "expected": {
+        "customer_name": "Sergii Jackson",
+        "product": "Premium Plan",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Premium Plan webhook delivery timeouts"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Sergii Jackson\",\n  \"product\": \"Premium Plan\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"high\",\n  \"summary\": \"Webhook deliveries are failing with timeout errors.\"\n}",
+      "predicted": {
+        "customer_name": "Sergii Jackson",
+        "product": "Premium Plan",
+        "issue_category": "technical",
+        "urgency": "high",
+        "summary": "Webhook deliveries are failing with timeout errors."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": false
+      }
+    },
+    {
+      "i": 17,
+      "email": "Hey, sync between Mobile App desktop and web takes 10+ minutes now. Used to be instant. — Halyna",
+      "expected": {
+        "customer_name": "Halyna",
+        "product": "Mobile App",
+        "issue_category": "technical",
+        "urgency": "high",
+        "summary": "Mobile App sync latency degraded"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Halyna\",\n  \"product\": \"Mobile App\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Sync between Mobile App and desktop/web is taking too long.\"\n}",
+      "predicted": {
+        "customer_name": "Halyna",
+        "product": "Mobile App",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Sync between Mobile App and desktop/web is taking too long."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 18,
+      "email": "Login broken on Starter Plan mobile. After entering password I get 'something went wrong'. iOS 17. — Bohdan",
+      "expected": {
+        "customer_name": "Bohdan",
+        "product": "Starter Plan",
+        "issue_category": "technical",
+        "urgency": "medium",
+        "summary": "Starter Plan mobile login error on iOS 17"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Bohdan\",\n  \"product\": \"Starter Plan\",\n  \"issue_category\": \"technical\",\n  \"urgency\": \"high\",\n  \"summary\": \"Login broken on mobile after entering password.\"\n}",
+      "predicted": {
+        "customer_name": "Bohdan",
+        "product": "Starter Plan",
+        "issue_category": "technical",
+        "urgency": "high",
+        "summary": "Login broken on mobile after entering password."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 19,
+      "email": "Two-factor auth is broken on Mobile App. Lost phone, codes don't work. Need backup access. — Olha Davis",
+      "expected": {
+        "customer_name": "Olha Davis",
+        "product": "Mobile App",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "2FA recovery needed"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Olha Davis\",\n  \"product\": \"Mobile App\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"high\",\n  \"summary\": \"Two-factor authentication is broken and backup access is needed.\"\n}",
+      "predicted": {
+        "customer_name": "Olha Davis",
+        "product": "Mobile App",
+        "issue_category": "account",
+        "urgency": "high",
+        "summary": "Two-factor authentication is broken and backup access is needed."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 20,
+      "email": "Please delete my account and all data per GDPR. Email: x@y.com. — Volodymyr",
+      "expected": {
+        "customer_name": "Volodymyr",
+        "product": "Priority Support",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "GDPR account deletion request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Volodymyr\",\n  \"product\": \"account\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"high\",\n  \"summary\": \"Request to delete account and all data per GDPR.\"\n}",
+      "predicted": {
+        "customer_name": "Volodymyr",
+        "product": "account",
+        "issue_category": "account",
+        "urgency": "high",
+        "summary": "Request to delete account and all data per GDPR."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": false,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 21,
+      "email": "Can you merge two Web Dashboard accounts I have? Same person, two emails. — Olha Marchenko",
+      "expected": {
+        "customer_name": "Olha Marchenko",
+        "product": "Web Dashboard",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Account merge request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Olha Marchenko\",\n  \"product\": \"Web Dashboard\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request to merge two Web Dashboard accounts.\"\n}",
+      "predicted": {
+        "customer_name": "Olha Marchenko",
+        "product": "Web Dashboard",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Request to merge two Web Dashboard accounts."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 22,
+      "email": "Can you merge two Enterprise Plan accounts I have? Same person, two emails. — Sarah Boyko",
+      "expected": {
+        "customer_name": "Sarah Boyko",
+        "product": "Enterprise Plan",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Account merge request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Sarah Boyko\",\n  \"product\": \"Enterprise Plan\",\n  \"issue_category\": \"account\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request to merge two Enterprise Plan accounts.\"\n}",
+      "predicted": {
+        "customer_name": "Sarah Boyko",
+        "product": "Enterprise Plan",
+        "issue_category": "account",
+        "urgency": "medium",
+        "summary": "Request to merge two Enterprise Plan accounts."
+      },
+      "valid_json": true,
+      "exact_match": true,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": true
+      }
+    },
+    {
+      "i": 23,
+      "email": "It would be amazing if API Access had a public API for the analytics dashboard. — Linda",
+      "expected": {
+        "customer_name": "Linda",
+        "product": "API Access",
+        "issue_category": "feature_request",
+        "urgency": "low",
+        "summary": "Public API for analytics dashboard"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Linda\",\n  \"product\": \"API Access\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request for a public API for the analytics dashboard.\"\n}",
+      "predicted": {
+        "customer_name": "Linda",
+        "product": "API Access",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Request for a public API for the analytics dashboard."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 24,
+      "email": "It would be amazing if Team Seats had a public API for the analytics dashboard. — Tetyana Boyko",
+      "expected": {
+        "customer_name": "Tetyana Boyko",
+        "product": "Team Seats",
+        "issue_category": "feature_request",
+        "urgency": "low",
+        "summary": "Public API for analytics dashboard"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Tetyana Boyko\",\n  \"product\": \"Team Seats\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request for a public API for the analytics dashboard.\"\n}",
+      "predicted": {
+        "customer_name": "Tetyana Boyko",
+        "product": "Team Seats",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Request for a public API for the analytics dashboard."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 25,
+      "email": "Would be great if Priority Support supported dark mode. Eyes hurt at night. — Lisa Marchenko",
+      "expected": {
+        "customer_name": "Lisa Marchenko",
+        "product": "Priority Support",
+        "issue_category": "feature_request",
+        "urgency": "low",
+        "summary": "Dark mode feature request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Lisa Marchenko\",\n  \"product\": \"Priority Support\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request for dark mode support in Priority Support.\"\n}",
+      "predicted": {
+        "customer_name": "Lisa Marchenko",
+        "product": "Priority Support",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Request for dark mode support in Priority Support."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 26,
+      "email": "Pls add bulk export to Starter Plan. Need to download 1000+ records monthly. — Mykhailo Bondarenko",
+      "expected": {
+        "customer_name": "Mykhailo Bondarenko",
+        "product": "Starter Plan",
+        "issue_category": "feature_request",
+        "urgency": "critical",
+        "summary": "Bulk export feature request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Mykhailo Bondarenko\",\n  \"product\": \"Starter Plan\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request to add bulk export feature to the Starter Plan.\"\n}",
+      "predicted": {
+        "customer_name": "Mykhailo Bondarenko",
+        "product": "Starter Plan",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Request to add bulk export feature to the Starter Plan."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 27,
+      "email": "Is there a status page for Desktop App? Want to monitor uptime. — Christopher Jackson",
+      "expected": {
+        "customer_name": "Christopher Jackson",
+        "product": "Desktop App",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Status page link request"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Christopher Jackson\",\n  \"product\": \"Desktop App\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Request for a status page to monitor uptime.\"\n}",
+      "predicted": {
+        "customer_name": "Christopher Jackson",
+        "product": "Desktop App",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Request for a status page to monitor uptime."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 28,
+      "email": "Hi team, just wanted to say API Access is awesome. Keep it up! — Ashley Melnyk",
+      "expected": {
+        "customer_name": "Ashley Melnyk",
+        "product": "API Access",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Positive feedback / testimonial"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Ashley Melnyk\",\n  \"product\": \"API Access\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"low\",\n  \"summary\": \"Customer appreciates the API Access feature.\"\n}",
+      "predicted": {
+        "customer_name": "Ashley Melnyk",
+        "product": "API Access",
+        "issue_category": "feature_request",
+        "urgency": "low",
+        "summary": "Customer appreciates the API Access feature."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": true,
+        "summary": false
+      }
+    },
+    {
+      "i": 29,
+      "email": "Is Desktop App HIPAA compliant? Need for healthcare client. — Bohdan Martin",
+      "expected": {
+        "customer_name": "Bohdan Martin",
+        "product": "Desktop App",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "HIPAA compliance question"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Bohdan Martin\",\n  \"product\": \"Desktop App\",\n  \"issue_category\": \"feature_request\",\n  \"urgency\": \"medium\",\n  \"summary\": \"Inquiry about HIPAA compliance for healthcare client.\"\n}",
+      "predicted": {
+        "customer_name": "Bohdan Martin",
+        "product": "Desktop App",
+        "issue_category": "feature_request",
+        "urgency": "medium",
+        "summary": "Inquiry about HIPAA compliance for healthcare client."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": false,
+        "urgency": false,
+        "summary": true
+      }
+    },
+    {
+      "i": 30,
+      "email": "Are you hiring? I love Free Plan and want to join the team. — Mykhailo Melnyk",
+      "expected": {
+        "customer_name": "Mykhailo Melnyk",
+        "product": "Free Plan",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Job inquiry"
+      },
+      "raw_output": "{\n  \"customer_name\": \"Mykhailo Melnyk\",\n  \"product\": \"Free Plan\",\n  \"issue_category\": \"other\",\n  \"urgency\": \"low\",\n  \"summary\": \"Inquiring about job opportunities.\"\n}",
+      "predicted": {
+        "customer_name": "Mykhailo Melnyk",
+        "product": "Free Plan",
+        "issue_category": "other",
+        "urgency": "low",
+        "summary": "Inquiring about job opportunities."
+      },
+      "valid_json": true,
+      "exact_match": false,
+      "field_match": {
+        "customer_name": true,
+        "product": true,
+        "issue_category": true,
+        "urgency": true,
+        "summary": false
+      }
+    }
+  ]
+}

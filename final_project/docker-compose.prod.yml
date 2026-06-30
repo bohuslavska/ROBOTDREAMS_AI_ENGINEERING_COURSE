@@ -1,0 +1,54 @@
+# Production stack: API + UI + RDS-compatible Postgres + GPU inference + observability
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+
+  api:
+    environment:
+      INFERENCE_MODE: remote
+      INFERENCE_SERVICE_URL: http://inference:8080
+      MODEL_VERSION: qwen3-8b-lora-v2
+    depends_on:
+      inference:
+        condition: service_healthy
+
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile.inference
+    env_file: .env
+    environment:
+      USE_MLX: "false"
+      BASE_MODEL: Qwen/Qwen3-8B
+      LORA_ADAPTER_PATH: /app/models/adapters/qwen3-8b-lora-v2
+      MODEL_VERSION: qwen3-8b-lora-v2
+      FALLBACK_MESSAGE: "Ой лихо, моделі розгубила"
+    volumes:
+      - ./models/adapters:/app/models/adapters:ro
+    ports:
+      - "8081:8080"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 180s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - whining
+
+  postgres:
+    # On AWS replace with RDS — set DATABASE_URL in .env
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+
+  grafana:
+    ports:
+      - "3001:3000"

@@ -1,0 +1,11 @@
+# Prometheus config for ECS — set API target via env at deploy time.
+# Default: scrape API service discovery or static target.
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: whiner-api
+    static_configs:
+      # Replace with your API task private IP or Cloud Map DNS
+      - targets: ["api.whiner.local:8000"]
+    metrics_path: /metrics

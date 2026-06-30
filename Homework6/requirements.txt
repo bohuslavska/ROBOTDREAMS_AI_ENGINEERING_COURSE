@@ -1,0 +1,13 @@
+# Core: Apple Silicon fine-tuning stack
+mlx-lm>=0.21.0
+
+# HuggingFace model download & auth
+huggingface_hub>=0.23.0
+
+# Jupyter notebook
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+# Already used by existing scripts (optional, only if running OpenAI/Together evals)
+# openai>=1.0.0
+# together>=1.0.0

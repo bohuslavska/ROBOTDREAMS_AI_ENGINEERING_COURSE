@@ -1,0 +1,82 @@
+[
+  {
+    "size": 10000,
+    "metric": "latency_p50_ms",
+    "baseline": 0.0215,
+    "current": 0.3982,
+    "change_percent": 1752.09,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 10000,
+    "metric": "latency_p95_ms",
+    "baseline": 0.0628,
+    "current": 3.5115,
+    "change_percent": 5491.56,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 10000,
+    "metric": "latency_p99_ms",
+    "baseline": 0.5001,
+    "current": 6.0601,
+    "change_percent": 1111.78,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 100000,
+    "metric": "latency_p50_ms",
+    "baseline": 0.0215,
+    "current": 2.1086,
+    "change_percent": 9707.44,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 100000,
+    "metric": "latency_p95_ms",
+    "baseline": 0.0628,
+    "current": 3.7738,
+    "change_percent": 5909.24,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 100000,
+    "metric": "latency_p99_ms",
+    "baseline": 0.5001,
+    "current": 6.7642,
+    "change_percent": 1252.57,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 300000,
+    "metric": "recall@1",
+    "baseline": 0.98,
+    "current": 0.78,
+    "change_percent": -20.41,
+    "reason": "quality degraded by 20%+"
+  },
+  {
+    "size": 300000,
+    "metric": "latency_p50_ms",
+    "baseline": 0.0215,
+    "current": 6.5272,
+    "change_percent": 30259.07,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 300000,
+    "metric": "latency_p95_ms",
+    "baseline": 0.0628,
+    "current": 8.2471,
+    "change_percent": 13032.32,
+    "reason": "latency increased by 20%+"
+  },
+  {
+    "size": 300000,
+    "metric": "latency_p99_ms",
+    "baseline": 0.5001,
+    "current": 13.0241,
+    "change_percent": 2504.3,
+    "reason": "latency increased by 20%+"
+  }
+]

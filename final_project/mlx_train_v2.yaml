@@ -1,0 +1,9 @@
+adapter_path: /Users/katerynaboguslavska/Desktop/Data_Science/ai-engineering/final_project/models/adapters/qwen3-8b-lora-v2
+data: /Users/katerynaboguslavska/Desktop/Data_Science/ai-engineering/final_project/data/mlx
+fine_tune_type: lora
+lora_parameters:
+  alpha: 32
+  dropout: 0.05
+  rank: 16
+  scale: 2.0
+model: mlx-community/Qwen3-8B-4bit

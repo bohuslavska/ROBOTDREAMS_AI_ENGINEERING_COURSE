@@ -1,0 +1,72 @@
+# ── Secrets & env ──────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Python / venv ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# ── OS / IDE ───────────────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# ── MODELS & WEIGHTS (never push) ──────────────────────────
+**/models/
+**/adapters/
+**/merged/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx
+
+# ── DATA & CORPUS ──────────────────────────────────────────
+**/data/
+**/datasets/
+**/pluperfect_grac/
+**/generation_checkpoints/
+**/mlruns/
+**/checkpoints/
+**/checkpoint-*/
+
+# Data file types
+*.csv
+*.tsv
+*.jsonl
+*.parquet
+*.feather
+*.pkl
+*.pickle
+
+# ── Archives & large media ───────────────────────────────────
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Logs & local DB
+*.log
+*.db
+
+# HF cache
+.cache/
+huggingface/
+
+# Submission zips
+*-submission.zip
+
+# Legacy scratch
+Project_robot_dreams.ipynb
+
+# Keep placeholders
+!**/models/adapters/.gitkeep
+!**/data/README.md

@@ -1,0 +1,35 @@
+{
+  "dataset": "chaotic",
+  "provider": "ollama",
+  "json_valid": true,
+  "result": {
+    "summary": "Обговорення та визначення завдань для розробки API документації та деплою сервера.",
+    "tasks": [
+      {
+        "owner": "Оля",
+        "task": "Виконав міграцію до бази даних та написав тести.",
+        "deadline": "14 або 15-го травня"
+      },
+      {
+        "owner": "Катя",
+        "task": "Робить API документацію.",
+        "deadline": "13 травня"
+      }
+    ],
+    "decisions": [
+      {
+        "decision": "Вирішено, що деплой тільки через CI/CD, без рук в прод."
+      },
+      {
+        "decision": "Замовляємо новий сервер з 32 гб ram."
+      }
+    ]
+  },
+  "latency": 235.85,
+  "tokens_in": 339,
+  "tokens_out": 93,
+  "tokens_total": 432,
+  "cost_usd": 0.0,
+  "error": null,
+  "notes": "Wrong owner — migration/tests task assigned to Оля (facilitator) instead of Дмитро. Deadline written as text not ISO. Decisions returned as objects."
+}

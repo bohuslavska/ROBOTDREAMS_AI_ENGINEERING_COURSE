@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-06-15T20:09:44.115887",
+  "model_id": "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit",
+  "hyperparameters": {
+    "rank": 16,
+    "lora_layers": 8,
+    "batch_size": 2,
+    "iters": 405,
+    "learning_rate": 2e-05
+  },
+  "eval_set_size": 30,
+  "base": {
+    "json_valid_rate": 0.9333,
+    "exact_match_rate": 0.4333,
+    "field_accuracy": {
+      "customer_name": 0.9333,
+      "product": 0.8333,
+      "issue_category": 0.8,
+      "urgency": 0.6333,
+      "summary": 0.6667
+    }
+  },
+  "finetuned": {
+    "json_valid_rate": 1.0,
+    "exact_match_rate": 0.7333,
+    "field_accuracy": {
+      "customer_name": 1.0,
+      "product": 0.9,
+      "issue_category": 0.9667,
+      "urgency": 0.8667,
+      "summary": 0.8
+    }
+  },
+  "lift": {
+    "exact_match": 0.3,
+    "urgency": 0.2334
+  },
+  "reference_models": {
+    "llama_3.3_70b": {
+      "exact_match_rate": 0.3667,
+      "urgency": 0.6333
+    },
+    "gpt_4o_mini": {
+      "exact_match_rate": 0.2,
+      "urgency": 0.4333
+    }
+  }
+}

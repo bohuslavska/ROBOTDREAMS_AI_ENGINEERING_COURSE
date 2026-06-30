@@ -1,0 +1,41 @@
+{
+  "family": "whiner-prometheus",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "prometheus",
+      "image": "prom/prometheus:v2.53.0",
+      "essential": true,
+      "portMappings": [{"containerPort": 9090, "protocol": "tcp"}],
+      "command": ["--config.file=/etc/prometheus/prometheus.yml"],
+      "mountPoints": [
+        {
+          "sourceVolume": "prometheus-config",
+          "containerPath": "/etc/prometheus",
+          "readOnly": true
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/whiner-prometheus",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "prometheus"
+        }
+      }
+    }
+  ],
+  "volumes": [
+    {
+      "name": "prometheus-config",
+      "efsVolumeConfiguration": {
+        "fileSystemId": "fs-REPLACE_OR_USE_CONFIG_IN_IMAGE",
+        "transitEncryption": "ENABLED"
+      }
+    }
+  ]
+}
